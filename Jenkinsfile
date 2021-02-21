@@ -1,10 +1,11 @@
 pipeline {
     agent {
     node {
-        wrap([$class: 'BuildUser']) {
-    def user = env.BUILD_USER_ID
-  }
         label 'master'
+        wrap([$class: 'BuildUser']) {
+       def user = env.BUILD_USER_ID
+  }
+        
        // customWorkspace '/some/other/path'
     }
 }
