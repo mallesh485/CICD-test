@@ -1,10 +1,10 @@
-
+def cause = currentBuild.getBuildCauses('hudson.model.Cause$UserIdCause')
+echo "userName: ${cause.userName}"
 pipeline {
     agent {
     node {
         label 'master'
-         def cause = currentBuild.getBuildCauses('hudson.model.Cause$UserIdCause')
-echo "userName: ${cause.userName}"
+         
        // customWorkspace '/some/other/path'
     }
 }
