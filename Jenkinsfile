@@ -1,11 +1,12 @@
+if (currentBuild.getBuildCauses('hudson.model.Cause$UserIdCause')['userId']){
+    // Will be run only if someone user triggers build
+    // Because in other cases this contructions returns null
+}
 pipeline {
     agent {
     node {
         label 'master'
-        wrap([$class: 'BuildUser']) {
-       def user = env.BUILD_USER_ID
-  }
-        
+            
        // customWorkspace '/some/other/path'
     }
 }
