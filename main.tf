@@ -12,7 +12,7 @@ resource "aws_instance" "web" {
   vpc_security_group_ids = ["${aws_security_group.webSG.id}"]
   tags = {
     Name = "remote-exec-provisioner"
-    Created by = "${userName}"
+    Created_by = "${userName}"
   }
   
 }
