@@ -27,6 +27,7 @@ pipeline {
 terraform init
 terraform plan -out \'task.plan\'
 terraform apply \'task.plan\'
+terraform destroy --auto-approve
 '''
             }
         }
