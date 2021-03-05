@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: language-bot-translator-deployment
+  namespace: dev
+  labels:
+      app: language-bot-translator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+       app: language-bot-translator
+  template:
+    metadata:
+      name: language-bot-translator-pod
+      labels:
+        app: language-bot-translator
+    spec:
+      containers:
+       - name: language-bot-translator-container
+         image: gcr.io/qai-bd-qa/language-translator-api-service:v1
+         ports:
+         - containerPort: 3000
+         env:
+         - name: FIRESTORE_KEY_FILE_PATH
+           value: "/code/keys/service-account.json"
+         - name: FIRESTORE_PROJECT_ID
+           value: "qai-bd-qa"
+         - name: NODE_ENV
+           value: "development"
+         volumeMounts:
+         - name: language-bot-translator-api-service-sa-key
+           mountPath: /code/keys
+         resources:
+           requests:
+            memory: "128Mi"
+            cpu: "0.2"
+           limits:
+            memory: "256Mi"
+            cpu: "0.4"
+      volumes:
+        - name: language-bot-translator-api-service-sa-key
+          secret:
+            defaultMode: 420
+            secretName: language-bot-translator-api-service-sa-key
+            items:
+            - key: service-account.json
+              path: service-account.json
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: language-bot-translator
+  name: language-bot-translator-service
+  namespace: dev
+spec:
+  selector:
+    app: language-bot-translator
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 3000

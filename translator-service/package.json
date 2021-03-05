@@ -1,0 +1,49 @@
+{
+  "name": "translator-service",
+  "version": "1.0.0",
+  "description": "A javascript file that translates dialoglfow agent from source language code to target language code",
+  "main": "index.js",
+  "dependencies": {
+    "@google-cloud/pubsub": "^2.2.0",
+    "@google-cloud/storage": "^5.0.1",
+    "@google-cloud/translate": "^5.3.0",
+    "archiver": "^4.0.1",
+    "lodash": "^4.17.15",
+    "pm2": "^4.4.0",
+    "unzipper": "^0.10.11",
+    "uuid": "^8.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.5.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
+  },
+  "author": "",
+  "license": "ISC"
+}
