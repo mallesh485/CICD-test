@@ -7,5 +7,4 @@ steps:
   - --source=.
   - --trigger-http
   - --runtime=nodejs10
-  - --allow-unauthenticated
   dir: 'cloud_functions/'
