@@ -1,0 +1,5 @@
+steps:
+    - name: gcr.io/cloud-builders/gcloud
+      entrypoint: 'bash'
+      args: [ '-c', "gcloud secrets versions access latest --secret=FIRESTORE_CREDENTIALS --format='get(payload.data)' | tr '_-' '/+' | base64 -d > service_key.json" ]  
+   
